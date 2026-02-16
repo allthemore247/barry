@@ -2681,7 +2681,7 @@ Move* bestMove(char* board, int color, Move* prevMove, int depth, int evaluator)
 		return NULL;
 	} else {
 		//Divide up problem space
-		int i, j, 
+		int i, j;
 		int* proc;
 		int* numProcs;
 		MPI_Comm_rank(MPI_COMM_WORLD, proc);
@@ -2925,6 +2925,7 @@ Move* newMove()
 	m->startCol = -1;
 	m->endCol = -1;
 	m->boardScore = 0;
+	return m;
 }
 
 /* Create a new move struct. */
