@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 	MPI_Comm_size(MPI_COMM_WORLD, numProcs);
 
 	//Require at least 1 slave node to run
-	if (&numProcs < 2)
+	if (*numProcs < 2)
 	{
 		if (&proc == HEAD)
 			printf("Program requires at least 1 slave node to run.\nTerminating.\n");
@@ -264,7 +264,7 @@ void sendKillSig()
 {
 	int i;
 	int sig = -1;
-	for (i = 1; i < &numProcs; i++) 
+	for (i = 1; i < *numProcs; i++) 
 		MPI_Send(&sig, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
 }
 
