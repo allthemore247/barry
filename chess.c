@@ -31,8 +31,8 @@
 
 //Global variables
 Move* prev;
-int proc;
-int numProcs;
+int* proc;
+int* numProcs;
 Move** moveQueue;	// Queue for storing previously executed moves
 int queueIndex;		// Current position in array queue
 int queueFull;		// Whether queue has been filled yet
@@ -57,20 +57,20 @@ int main(int argc, char* argv[])
 {	
 	//Initialize MPI
 	MPI_Init(&argc, &argv);
-	MPI_Comm_rank(MPI_COMM_WORLD, (int*)proc);
-	MPI_Comm_size(MPI_COMM_WORLD, (int*)numProcs);
+	MPI_Comm_rank(MPI_COMM_WORLD, proc);
+	MPI_Comm_size(MPI_COMM_WORLD, numProcs);
 
 	//Require at least 1 slave node to run
-	if (numProcs < 2)
+	if (&numProcs < 2)
 	{
-		if (proc == HEAD)
+		if (&proc == HEAD)
 			printf("Program requires at least 1 slave node to run.\nTerminating.\n");
 		MPI_Finalize();
 		return 0;
 	}
 
 	//Divide between head and slave node program
-	if (proc == HEAD)
+	if (&proc == HEAD)
 	{
 		//Head node code
 		//======================================================================
@@ -264,7 +264,7 @@ void sendKillSig()
 {
 	int i;
 	int sig = -1;
-	for (i = 1; i < numProcs; i++) 
+	for (i = 1; i < &numProcs; i++) 
 		MPI_Send(&sig, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
 }
 

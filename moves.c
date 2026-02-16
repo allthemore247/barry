@@ -2681,15 +2681,17 @@ Move* bestMove(char* board, int color, Move* prevMove, int depth, int evaluator)
 		return NULL;
 	} else {
 		//Divide up problem space
-		int i, j, proc, numProcs;
-		MPI_Comm_rank(MPI_COMM_WORLD, (int*)proc);
-		MPI_Comm_size(MPI_COMM_WORLD, (int*)numProcs);
+		int i, j, 
+		int* proc;
+		int* numProcs;
+		MPI_Comm_rank(MPI_COMM_WORLD, &proc);
+		MPI_Comm_size(MPI_COMM_WORLD, &numProcs);
 		int segSize, procCap;
-		if (legalMoves->size >= numProcs - 1)
+		if (legalMoves->size >= &numProcs - 1)
 		{
 			//There were more moves than processors
-			segSize = legalMoves->size / (numProcs - 1);
-			procCap = numProcs;
+			segSize = legalMoves->size / (&numProcs - 1);
+			procCap = &numProcs;
 		} else {
 			//There are more processors than legal moves
 			segSize = 1;
