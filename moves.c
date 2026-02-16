@@ -2682,8 +2682,8 @@ Move* bestMove(char* board, int color, Move* prevMove, int depth, int evaluator)
 	} else {
 		//Divide up problem space
 		int i, j, proc, numProcs;
-		MPI_Comm_rank(MPI_COMM_WORLD, proc);
-		MPI_Comm_size(MPI_COMM_WORLD, numProcs);
+		MPI_Comm_rank(MPI_COMM_WORLD, (int*)proc);
+		MPI_Comm_size(MPI_COMM_WORLD, (int*)numProcs);
 		int segSize, procCap;
 		if (legalMoves->size >= numProcs - 1)
 		{

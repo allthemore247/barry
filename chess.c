@@ -57,8 +57,8 @@ int main(int argc, char* argv[])
 {	
 	//Initialize MPI
 	MPI_Init(&argc, &argv);
-	MPI_Comm_rank(MPI_COMM_WORLD, proc);
-	MPI_Comm_size(MPI_COMM_WORLD, numProcs);
+	MPI_Comm_rank(MPI_COMM_WORLD, (int*)proc);
+	MPI_Comm_size(MPI_COMM_WORLD, (int*)numProcs);
 
 	//Require at least 1 slave node to run
 	if (numProcs < 2)
